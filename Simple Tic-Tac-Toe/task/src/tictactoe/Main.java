@@ -1,5 +1,6 @@
 package tictactoe;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -10,14 +11,11 @@ public class Main {
         makeBoard(fields);
         printBoard(fields);
         play(fields, scan, counter);
-
-
     }
 
 
-    public static void getResult(char[][] fields) {
-        boolean draw = false;
-        //boolean impossible = false;
+    public static String getResult(char[][] fields) {
+
         // Counting total X's and O's
         int xTotal = 0;
         int oTotal = 0;
@@ -53,36 +51,19 @@ public class Main {
                         fields[2][0] + fields[1][1] + fields[0][2] == 237;
 
 
-        /* Calculating if the match is impossible or drawn and printing it to console
-        /*if (Math.abs(xTotal - oTotal) > 1 || oWins && xWins) {
-            impossible = true;
-            System.out.println("Impossible");
-        } else */
         if (Math.abs(xTotal + oTotal) == 9 && !oWins && !xWins) {
-            draw = true;
-            System.out.println("Draw");
+            return "Draw";
         }
 
         // If game is neither drawn nor impossible, checking if it is won and printing it to console
-        if (!draw) {
-            if (xWins) {
-                System.out.println("X wins");
-            }
-            if (oWins) {
-                System.out.println("O wins");
-            }
+
+        if (xWins) {
+            return "X wins";
+        } else if (oWins) {
+            return "O wins";
         }
 
-        // If nothing happened yet, checking if the game is not finished and printing it to console
-        if (!draw && !xWins && !oWins) {
-            for (char[] field : fields) {
-                for (char c : field) {
-                    if (c == '_') {
-                        break;
-                    }
-                }
-            }
-        }
+        return " ";
     }
 
 
@@ -103,7 +84,7 @@ public class Main {
             int coordA = 0;
             int coordB = 0;
             try {
-                String[] pieces = scan.nextLine().split("");
+                String[] pieces = scan.nextLine().split(" ");
                 coordA = Integer.parseInt(pieces[0]);
                 coordB = Integer.parseInt(pieces[1]);
                 System.out.println(coordA);
@@ -129,13 +110,9 @@ public class Main {
     }
 
     public static void makeBoard(char[][] fields) {
-        int counter = 0;
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[i].length; j++) {
-                fields[i][j] = '_';
-                counter++;
 
-            }
+        for (char[] row : fields) {
+            Arrays.fill(row, '_');
         }
     }
 
@@ -143,8 +120,10 @@ public class Main {
         while (true) {
             makeMove(fields, scan, counter);
             counter++;
-            getResult(fields);
-
+            if (getResult(fields).equals("Draw") || getResult(fields).equals("X wins") || getResult(fields).equals("O wins")) {
+                System.out.println(getResult(fields));
+                break;
+            }
         }
     }
 }
