@@ -6,7 +6,7 @@ class Main {
         String cg = scan.nextLine().toLowerCase();
         double a = 0;
         for (int i = 0; i < cg.length(); i++) {
-            if ((cg.charAt(i) == 'g') || (cg.charAt(i) == 'c')) {
+            if (cg.charAt(i) == 'g' || cg.charAt(i) == 'c') {
                 a++;
             }
         }

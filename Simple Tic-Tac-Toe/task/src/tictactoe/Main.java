@@ -13,7 +13,6 @@ public class Main {
         play(fields, scan, counter);
     }
 
-
     public static String getResult(char[][] fields) {
 
         // Counting total X's and O's
@@ -66,7 +65,6 @@ public class Main {
         return " ";
     }
 
-
     public static void printBoard(char[][] fields) {
         System.out.println("---------");
         System.out.printf("| %s %s %s |\n", fields[0][0], fields[0][1], fields[0][2]);
@@ -106,11 +104,9 @@ public class Main {
                 break;
             }
         }
-
     }
 
     public static void makeBoard(char[][] fields) {
-
         for (char[] row : fields) {
             Arrays.fill(row, '_');
         }
